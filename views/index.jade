@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to aa #{title}
+
+  - var x = 5;
+  div
+    ul
+      - for (var i=1; i<=x; i++) {
+        li Hello
+      - }
+ 
