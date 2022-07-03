@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
-
+var Company = require("../models/country");
 /* GET users list. */
 
 router.get("/", async (req, res) => {
   try {
-    const userList = await User.find();
+    const userList = await Company.find();
     res.json(userList);
   } catch (err) {
     res.send({ message: err.message });
