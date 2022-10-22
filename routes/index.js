@@ -9,8 +9,8 @@ var Country = require("../models/country");
 
 const t = { name: "Mahin", path: "IT People ltd" };
 
-router.get("/", (req, res, next) => {
-  res.send(t);
+router.get("/:params", (req, res, next) => {
+  res.send(req.params);
 });
 
 /* GET Country list. */
@@ -18,7 +18,6 @@ router.get("/", (req, res, next) => {
 router.get("/get_country", async (req, res) => {
   try {
     const countryList = await Country.find({});
-    console.log(countryList);
     res.json(countryList);
   } catch (err) {
     res.send({ message: err.message });

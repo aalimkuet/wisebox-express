@@ -1,12 +1,14 @@
 var express = require("express");
 var router = express.Router();
 var User = require("../models/user");
-var Company = require("../models/country");
+var Country = require("../models/country");
 /* GET users list. */
 
 router.get("/", async (req, res) => {
   try {
-    const userList = await Company.find();
+    console.log('a');
+    const userList = await Country.find();
+    console.log(userList);
     res.json(userList);
   } catch (err) {
     res.send({ message: err.message });
@@ -16,12 +18,19 @@ router.get("/", async (req, res) => {
 // Create a new user
 router.post("/create", async (req, res) => {
   const user = new User({
-    name: req.body.name,
-    designation: req.body.designation,
-    organization: req.body.organization,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    country: req.body.country,
+    city: req.body.city,
+    state: req.body.state,
+    phoneCode: req.body.phoneCode,
+    phone: req.body.phone,
+    email: req.body.email,
+    password: req.body.password,
   });
   try {
     const saveUser = await user.save();
+    console.log(saveUser);
     res.json(saveUser);
   } catch (err) {
     res.send(err);
@@ -36,9 +45,15 @@ router.patch("/update/:userId", async (req, res) => {
       { _id: req.params.userId },
       {
         $set: {
-          name: req.body.name,
-          designation: req.body.designation,
-          organization: req.body.organization,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          country: req.body.country,
+          city: req.body.city,
+          state: req.body.state,
+          phoneCode: req.body.phoneCode,
+          phone: req.body.phone,
+          email: req.body.email,
+          password: req.body.password,
         },
       }
     );
